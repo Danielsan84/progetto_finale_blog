@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-transparent">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="{{ route('home') }}">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,15 +11,22 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">register</a>
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
                 </li>
                 @auth
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('article.create') }}">Create Article</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('article.create') }}">Create Article</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('careers') }}">Lavora con noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('article.index') }}">Tuttti gli articoli</a>
+                    </li>
                 @endauth
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
-            
+
+
 
 
                 {{-- <li class="nav-item">
@@ -31,14 +38,27 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Benvenuto {{ Auth::user()->name }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="">Profilo</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="">Profilo di </a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
+
+                            @if(Auth::user()->is_admin)
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            @endif
+
+                            @if(Auth::user()->is_revisor)
+                                <li><a class="dropdown-item" href="{{ route('revisor.dashboard') }}">Dashboard del revisore</a></li>
+                            @endif
+
+                            @if(Auth::user()->is_writer)
+                            <li><a class="dropdown-item" href="{{ route('writer.dashboard') }}">Dashboard del redattore</a></li>
+                            @endif 
+
                             <li><a class="dropdown-item" href="#"
                                     onclick="event.preventDefault(); document.querySelector('#form-logout').submit();">Logout</a>
-                                   
+
                             </li>
                             <form method="POST" action="{{ route('logout') }}" id="form-logout" class="d-none">
                                 @csrf
@@ -59,22 +79,31 @@
                     </li>
                 @endguest
             </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <div class="dark-mode-switch">
-                    <label class="switch-label" for="dark-mode-switch">Dark mode</label>
-                    <label class="switch">
-                      <input type="checkbox" id="dark-mode-switch">
-                      <span class="slider round"></span>
-                    </label>
-                  </div>
-                </div>
-                </div>
-
-
+            <form class="d-flex" method="GET" action="{{ route('article.search') }}">
+                <input class="form-control me-2" type="search" name="query" placeholder="Cosa stai cercando?" aria-label="Search">
+                <button class="btn btn-outline-info" type="submit">Cerca</button>
+                {{-- <div class="switch">
+                    <div class="switch__1">
+                        <input id="switch-1" type="checkbox" checked>
+                        <label for="switch-1" onclick="toggleDarkMode()"></label>
+                    </div>
+                </div> --}}
                 
+                
+                
+                
+            </form>
+{{-- <button id="dark-mode-switch" class="btn btn-outline-info" type="submit">Dark-mode</button> --}}
+{{-- <button onclick="toggleDarkMode()">Cambia modalità</button> --}}
+
+
+
+
+
+
+
+
+
 
 
 </nav>

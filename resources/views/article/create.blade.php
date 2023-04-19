@@ -1,11 +1,13 @@
 <x-layout>
-    <div class="container-fluid p-5 bg-info text-center text-bg-danger">
+    <header class="header-blog">
+    <div class="container-fluid p-5 text-center">
         <div class="row justify-content-center">
             <h1 class="display-1">
-                Iserisci un articolo
+                Inserisci un articolo
             </h1>
         </div>
     </div>
+</header>
 
     <div class="container my-5">
         <div class="row justify-center">
@@ -47,6 +49,11 @@
                     <div class="md-3">
                         <label for="body" class="form-label">Corpo del testo:</label>
                         <textarea name="body" id="body" cols="30" rows="7" class="form-control">{{ old('body') }}</textarea>
+                    </div>
+                    <div class="md-3">
+                        <label for="tags" class="form-label">Tags:</label>
+                        <input name="tags" id="tags" class="form-control" value="{{ old('tags') }}">
+                        <span class="small fst-italic">Dividi ogni tag con virgola</span>
                     </div>
 
                     <div class="mt-2">
