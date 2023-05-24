@@ -18,6 +18,10 @@ let count = 0;
 const themePicker = document.getElementById('themePicker');
 const themeList = document.getElementById('themeGrid');
 
+
+
+
+
 // Change the CSS variables on the root element, depending on the curent theme
 const changeTheme = (theme) => {
 	
